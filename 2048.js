@@ -17,15 +17,17 @@ var Row = function(cellVaules) {
         this.horizontalLength = this.row.length;
     // }
 
-    function newNumber() {
-        var min = 1;
-        var max = 2;
-        var probably = Math.random();
-        if (probably > 0.2) {
-            return 2
-        } else {
-            return 4
+    this.addNewNumeric = function (value) {
+        min = 0;
+        max = this.horizontalLength-1;
+        var cellNum = Math.floor(Math.random() * (max - min + 1)) + min;
+        if(this.row[cellNum].value === undefined){
+            this.row[cellNum].set(value);
+            return true
         }
+        return false;
+
+
     }
     this.deleteEmptyCell = function () {
         for (var i = this.row.length - 1; i >= 0; i--) {
@@ -84,6 +86,14 @@ var Row = function(cellVaules) {
         }
         return this.getArray();
     }
+    this.isFull = function () {
+        for (var i = 0; i < this.row.length ; i++) {
+            if(this.row[i].value === undefined){
+                return false
+            }
+        }
+        return true;
+    }
     this.toString = function() {
         var output = this.getArray();
         return output.toString();
@@ -101,8 +111,9 @@ var Row = function(cellVaules) {
 
 //console.log(test);
 var Matrix2048 = function(colNum) {
-    this.matrix = [new Row([undefined,4,2,undefined]), new Row([4,8,2,2]), new Row([undefined,8,undefined,undefined]), new Row([undefined,16,4,undefined])];
-
+    this.matrix = [new Row([undefined,undefined,2,undefined]), new Row([undefined,undefined,2,undefined]), new Row([undefined,undefined,undefined,undefined]), new Row([undefined,undefined,undefined,undefined])];
+    this.verticalLength = this.matrix.length;
+    this.horizontalLength = this.matrix[0].row.length;
     this.getCol = function (colNum) {
         var col;
         var colValues = [];
@@ -152,6 +163,36 @@ var Matrix2048 = function(colNum) {
             row.left();
         })
     }
+    this.newNumber = function () {
+        var min = 1;
+        var max = 2;
+        var probably = Math.random();
+        if (probably > 0.2) {
+            return 2
+        } else {
+            return 4
+        }
+    }
+    this.isFull = function () {
+        for (var i = 0; i < this.matrix.length; i++) {
+            if(!this.matrix[i].isFull()){
+                return false;
+            }
+        }
+        return true
+    }
+    this.addNumeric = function () {
+        var min = 0;
+        var max = this.verticalLength-1;
+        var rowNum = Math.floor(Math.random() * (max - min + 1)) + min;
+        while(!this.matrix[rowNum].addNewNumeric(this.newNumber())){
+            rowNum = Math.floor(Math.random() * (max - min + 1)) + min;
+            if(this.isFull()){
+                console.log('Game Over');
+                break;
+            }
+        }
+    }
     this.move = function(moveTo) {
         switch (moveTo) {
             case 'right':
@@ -173,13 +214,13 @@ var Matrix2048 = function(colNum) {
             default:
                 console.log('impossible move to ' + moveTo);
         }
+        this.addNumeric();
     }
     this.getMatrix = function () {
         var output = [];
         this.matrix.forEach(function(row, i, rows) {
             output.push(row.getArray());
         });
-        //console.log(output.toString());
         return output;
     }
     this.toString = function () {
