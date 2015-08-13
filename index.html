@@ -3,34 +3,84 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>2048</title>
+    <style>
+        .container{
+            font: 2em normal Halvetica, sans-serif;
+        }
+        .table2048{
+            margin: 0 auto;
+        }
+        .table2048 td{
+            width: 2em;
+            height: 2em;
+            text-align: center;
+            vertical-align: middle;
+            border: 3px solid #eee;
+        }
+        .table2048 td.color-2{
+            background-color: rgba(226, 185, 43, 0.68);
+        }
+        .table2048 td.color-4{
+            background-color: rgba(162, 231, 35, 0.77);
+        }
+        .table2048 td.color-8{
+            background-color: rgba(13, 238, 198, 0.8);
+        }
+        .table2048 td.color-16{
+            background-color: rgba(209, 35, 231, 0.54);
+        }
+        .table2048 td.color-32{
+            background-color: rgba(231, 88, 35, 0.73);
+        }
+        .table2048 td.color-64{
+            background-color: rgba(68, 35, 231, 0.48);
+        }
+        .table2048 td.color-128{
+            background-color: rgba(35, 231, 213, 0.73);
+        }
+        .table2048 td.color-256{
+            background-color: rgba(221, 231, 35, 0.64);
+        }
+        .table2048 td.color-512{
+            background-color: rgba(35, 166, 231, 0.68);
+        }
+        .table2048 td.color-1024{
+            background-color: rgba(226, 74, 0, 0.76);
+        }
+        .table2048 td.color-2048{
+            background-color: rgba(231, 46, 35, 0.77);
+        }
+    </style>
 </head>
-    <table>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </table>
+    <div class="container">
+        <table class="table2048">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <script src="2048.js"></script>
